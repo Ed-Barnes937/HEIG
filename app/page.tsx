@@ -5,11 +5,15 @@ export default async function Home() {
   const supabase = await createClient();
   const { data: ideas } = await supabase.from("Ideas").select();
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   if (!ideas) {
     return <div>No ideas</div>;
   }
 
   const ideaData = ideas[0];
 
-  return <IdeaCard idea={ideaData.idea} />;
+  return <IdeaCard idea={ideaData.idea} isLoggedIn={!!user} />;
 }

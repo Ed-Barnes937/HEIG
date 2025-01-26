@@ -58,7 +58,7 @@ export const IdeaCard = ({
           {!isLoggedIn && (
             <Button asChild size={"icon"}>
               <Link
-                href={"/signup"}
+                href={"/sign-in"}
                 aria-label={"Sign up to generate more ideas"}
               >
                 <Dices />
