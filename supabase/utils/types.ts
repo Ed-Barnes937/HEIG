@@ -9,12 +9,13 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      Ideas: {
+      ideas: {
         Row: {
           affiliate_codes: string[] | null
           affiliate_links: string[] | null
           age_range: Database["public"]["Enums"]["idea_age_range"] | null
           created_at: string
+          equipment_required: string[] | null
           id: number
           idea: string
           tags: string[] | null
@@ -26,6 +27,7 @@ export type Database = {
           affiliate_links?: string[] | null
           age_range?: Database["public"]["Enums"]["idea_age_range"] | null
           created_at?: string
+          equipment_required?: string[] | null
           id?: number
           idea: string
           tags?: string[] | null
@@ -37,6 +39,7 @@ export type Database = {
           affiliate_links?: string[] | null
           age_range?: Database["public"]["Enums"]["idea_age_range"] | null
           created_at?: string
+          equipment_required?: string[] | null
           id?: number
           idea?: string
           tags?: string[] | null
@@ -49,26 +52,29 @@ export type Database = {
         Row: {
           avatar_url: string | null
           created_at: string | null
-          free_roles: number | null
+          free_roles: number
           id: string
           nickname: string | null
-          tokens: number | null
+          subscription_tier: Database["public"]["Enums"]["subscription_tiers"]
+          tokens: number
         }
         Insert: {
           avatar_url?: string | null
           created_at?: string | null
-          free_roles?: number | null
+          free_roles?: number
           id: string
           nickname?: string | null
-          tokens?: number | null
+          subscription_tier?: Database["public"]["Enums"]["subscription_tiers"]
+          tokens?: number
         }
         Update: {
           avatar_url?: string | null
           created_at?: string | null
-          free_roles?: number | null
+          free_roles?: number
           id?: string
           nickname?: string | null
-          tokens?: number | null
+          subscription_tier?: Database["public"]["Enums"]["subscription_tiers"]
+          tokens?: number
         }
         Relationships: []
       }
@@ -82,6 +88,7 @@ export type Database = {
     Enums: {
       idea_age_range: "primary" | "secondary" | "college"
       idea_type: "basic" | "sponsored" | "collaboration"
+      subscription_tiers: "free" | "paid" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never

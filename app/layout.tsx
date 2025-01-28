@@ -35,7 +35,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="min-h-screen flex flex-col items-center bg-gradient-to-b">
+          <main className="min-h-screen grid grid-rows-[auto_1fr_auto] items-center bg-gradient-to-b">
             <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
               <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
                 <div className="flex gap-5 items-center font-semibold">
@@ -44,9 +44,8 @@ export default function RootLayout({
                 <HeaderAuth />
               </div>
             </nav>
-            <div className="w-full flex-grow flex items-center justify-center max-w-5xl p-5 mx-40">
-              {children}
-            </div>
+
+            {children}
 
             <footer className="w-full flex items-center justify-end border-t text-xs gap-8 p-6">
               <ThemeSwitcher />
