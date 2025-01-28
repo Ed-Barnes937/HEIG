@@ -3,11 +3,10 @@ import { createClient } from "@/supabase/utils/server";
 
 export default async function Home() {
   const supabase = await createClient();
-  const { data: ideas } = await supabase.from("Ideas").select();
-
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  const { data: ideas } = await supabase.from("Ideas").select("*");
 
   if (!ideas) {
     return <div>No ideas</div>;
@@ -15,5 +14,5 @@ export default async function Home() {
 
   const ideaData = ideas[0];
 
-  return <IdeaCard idea={ideaData.idea} isLoggedIn={!!user} />;
+  return <IdeaCard idea={ideaData?.idea || ""} user={user} />;
 }

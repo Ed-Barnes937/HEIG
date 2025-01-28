@@ -10,22 +10,55 @@ import {
 } from "./ui/card";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import type { User } from "@supabase/supabase-js";
+import { useCallback, useEffect, useState } from "react";
+import { createClient } from "@/supabase/utils/client";
 
 interface IdeaCardProps {
   idea: string;
-  rerollsLeft?: number;
   error?: string;
-  isLoggedIn?: boolean;
   handleReroll?: () => void;
+  user: User | null;
 }
 
 export const IdeaCard = ({
   idea,
   error,
-  rerollsLeft = 0,
   handleReroll = () => {},
-  isLoggedIn = false,
+  user,
 }: IdeaCardProps) => {
+  const isLoggedIn = !!user;
+
+  const supabase = createClient();
+  const [freeRoles, setFreeRoles] = useState<number>(0);
+
+  const getFreeRoles = useCallback(async () => {
+    try {
+      const { data, error, status } = await supabase
+        .from("profiles")
+        .select("free_roles")
+        .eq("id", user?.id)
+        .single();
+
+      if (error && status !== 406) {
+        console.error(error);
+        throw error;
+      }
+
+      if (data) {
+        setFreeRoles(data.free_roles || 0);
+      } else {
+        return 0;
+      }
+    } catch (error) {
+      alert("Error loading free roles");
+    }
+  }, [user, supabase]);
+
+  useEffect(() => {
+    getFreeRoles();
+  }, [user, getFreeRoles]);
+
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
@@ -33,9 +66,9 @@ export const IdeaCard = ({
           <div className="flex flex-col gap-2">
             <CardTitle>Today's Idea</CardTitle>
             {isLoggedIn &&
-              (rerollsLeft > 0 ? (
+              (freeRoles > 0 ? (
                 <p className="text-sm text-gray-500">
-                  {rerollsLeft} free re-rolls left
+                  {freeRoles} free re-rolls left
                 </p>
               ) : (
                 <p className="text-sm text-gray-500">
@@ -50,17 +83,20 @@ export const IdeaCard = ({
             <Button
               onClick={() => handleReroll()}
               aria-label={"Get New Idea"}
+              title={"Get New Idea"}
               size={"icon"}
             >
               <Dices />
             </Button>
           )}
           {!isLoggedIn && (
-            <Button asChild size={"icon"}>
-              <Link
-                href={"/sign-in"}
-                aria-label={"Sign up to generate more ideas"}
-              >
+            <Button
+              asChild
+              size={"icon"}
+              aria-label={"Sign up to generate more ideas"}
+              title={"Sign up to generate more ideas"}
+            >
+              <Link href={"/sign-in"}>
                 <Dices />
               </Link>
             </Button>
