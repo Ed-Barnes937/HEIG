@@ -1,25 +1,13 @@
 import { IdeaCard } from "@/components/IdeaCard";
 import { H1 } from "@/components/ui/H1";
-import { createClient } from "@/supabase/utils/server";
 import { Lightbulb } from "lucide-react";
+import userService from "./_services/userService";
+import ideaService from "./_services/ideaService";
 
 export default async function Home() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  const { data: ideas } = await supabase.from("ideas").select("*");
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("id", user?.id || "")
-    .single();
-
-  if (!ideas) {
-    return <div>No ideas</div>;
-  }
-
-  const ideaData = ideas[0];
+  const isLoggedIn = await userService.isLoggedIn();
+  const profile = await userService.getUserProfile();
+  const idea = await ideaService.getDailyIdea();
 
   const tokenCount = profile?.tokens || 0;
   const freeRerollCount = profile?.free_roles || 0;
@@ -31,11 +19,14 @@ export default async function Home() {
           <Lightbulb className="w-10 h-10" />
           <H1>Today's Learning Adventure</H1>
         </div>
-        <IdeaCard
-          idea={ideaData}
-          isLoggedIn={!!user}
-          rerolls={tokenCount + freeRerollCount}
-        />
+        {idea && (
+          <IdeaCard
+            idea={idea}
+            isLoggedIn={isLoggedIn}
+            rerolls={tokenCount + freeRerollCount}
+          />
+        )}
+        Ï
       </div>
     </div>
   );

@@ -9,38 +9,83 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      equipment: {
+        Row: {
+          affiliate_code: string | null
+          affiliate_link: string | null
+          description: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          affiliate_code?: string | null
+          affiliate_link?: string | null
+          description?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          affiliate_code?: string | null
+          affiliate_link?: string | null
+          description?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      idea_equipment: {
+        Row: {
+          equipment_id: string
+          idea_id: string
+        }
+        Insert: {
+          equipment_id: string
+          idea_id: string
+        }
+        Update: {
+          equipment_id?: string
+          idea_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "idea_equipment_equipment_id_fkey"
+            columns: ["equipment_id"]
+            isOneToOne: false
+            referencedRelation: "equipment"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "idea_equipment_idea_id_fkey"
+            columns: ["idea_id"]
+            isOneToOne: false
+            referencedRelation: "ideas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       ideas: {
         Row: {
-          affiliate_codes: string[] | null
-          affiliate_links: string[] | null
           age_range: Database["public"]["Enums"]["idea_age_range"] | null
           created_at: string
-          equipment_required: string[] | null
-          id: number
+          id: string
           idea: string
           tags: string[] | null
           theme: string | null
           type: Database["public"]["Enums"]["idea_type"] | null
         }
         Insert: {
-          affiliate_codes?: string[] | null
-          affiliate_links?: string[] | null
           age_range?: Database["public"]["Enums"]["idea_age_range"] | null
           created_at?: string
-          equipment_required?: string[] | null
-          id?: number
+          id?: string
           idea: string
           tags?: string[] | null
           theme?: string | null
           type?: Database["public"]["Enums"]["idea_type"] | null
         }
         Update: {
-          affiliate_codes?: string[] | null
-          affiliate_links?: string[] | null
           age_range?: Database["public"]["Enums"]["idea_age_range"] | null
           created_at?: string
-          equipment_required?: string[] | null
-          id?: number
+          id?: string
           idea?: string
           tags?: string[] | null
           theme?: string | null

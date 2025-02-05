@@ -1,4 +1,4 @@
-import { signOutAction } from "@/app/actions/auth";
+import { signOutAction } from "@/app/api/auth";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import userService from "@/app/_services/userService";

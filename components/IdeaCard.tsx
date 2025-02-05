@@ -1,15 +1,7 @@
 "use client";
-import { AlertCircle, Dices, RefreshCcw, RefreshCcwDot } from "lucide-react";
+import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
-import { Button } from "./ui/button";
-import Link from "next/link";
+import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import type { Database } from "@/supabase/utils/types";
 import RefreshIdeaButton from "./RefreshIdeaButton";
 
@@ -53,7 +45,7 @@ export const IdeaCard = ({
       ) : (
         <p className="text-lg mb-4">{idea.idea}</p>
       )}
-      {idea.equipment_required && (
+      {/* {idea.equipment_required && (
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-muted-foreground">
             You'll need:
@@ -69,7 +61,7 @@ export const IdeaCard = ({
             ))}
           </div>
         </div>
-      )}
+      )} */}
     </CardContent>
     <CardFooter className="justify-end">
       <RefreshIdeaButton
