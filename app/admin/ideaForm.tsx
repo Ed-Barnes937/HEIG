@@ -34,7 +34,7 @@ const IdeaForm = ({
   const [state, formAction] = useActionState(uploadItem, undefined);
 
   return (
-    <form action={formAction} className="flex flex-col w-1/2 mx-auto">
+    <form action={formAction} className="flex flex-col mx-auto">
       <h1 className="text-2xl font-medium">New idea!</h1>
       <div className="flex flex-col gap-3 [&>input]:mb-3 mt-8">
         <Label htmlFor="idea">Idea</Label>

@@ -13,8 +13,8 @@ export default async function Home() {
   const freeRerollCount = profile?.free_roles || 0;
 
   return (
-    <div className="h-full container mx-auto px-4 py-8">
-      <div className="flex flex-col items-center text-center space-y-6">
+    <div className="h-full @sm:min-w-3xl md:min-w-4xl lg:min-w-2xl mx-auto px-4 py-8 bg-background/95 z-50 rounded-lg">
+      <div className="flex flex-col items-center text-center space-y-12 h-full justify-center">
         <div className="flex items-center space-x-4">
           <Lightbulb className="w-10 h-10" />
           <H1>Today's Learning Adventure</H1>
@@ -26,7 +26,6 @@ export default async function Home() {
             rerolls={tokenCount + freeRerollCount}
           />
         )}
-        Ï
       </div>
     </div>
   );

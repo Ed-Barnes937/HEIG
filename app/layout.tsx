@@ -4,6 +4,8 @@ import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import Link from "next/link";
 import "./globals.css";
+import { Logo } from "@/components/Logo";
+import { Background } from "@/components/Background";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -36,17 +38,18 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <main className="min-h-screen grid grid-rows-[auto_1fr_auto] items-center bg-gradient-to-b">
-            <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-              <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
-                <div className="flex gap-5 items-center font-semibold">
-                  <Link href={"/"}>HEIG</Link>
-                </div>
-                <HeaderAuth />
+            <div className="absolute -z-10 h-screen w-screen">
+              <Background />
+            </div>
+            <nav className="w-full flex justify-between border-b-foreground/10 h-32 px-8">
+              <div className="font-semibold">
+                <Link href={"/"}>
+                  <Logo />
+                </Link>
               </div>
+              <HeaderAuth />
             </nav>
-
             {children}
-
             <footer className="w-full flex items-center justify-end border-t text-xs gap-8 p-6">
               <ThemeSwitcher />
             </footer>
