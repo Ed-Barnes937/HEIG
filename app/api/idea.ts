@@ -3,14 +3,25 @@
 import { encodedRedirect } from "@/utils/utils";
 import ideaService from "../_services/ideaService";
 import { z } from "zod";
-import { TablesInsert } from "@/supabase/utils/types";
+import { Tables, TablesInsert } from "@/supabase/utils/types";
 
 const ideaSchema = z.custom<TablesInsert<"ideas">>();
 
 export const uploadItem = async (prevData: unknown, formData: FormData) => {
-  const idea = Object.fromEntries(formData);
-  const parsedIdea = ideaSchema.safeParse(idea);
+  const ideaText = formData.get("idea");
+  const type = formData.get("type");
   const equipmentIds = formData.getAll("equipment_ids");
+  const tags = formData.getAll("tags");
+  const theme = formData.getAll("theme");
+
+  const idea = {
+    idea: ideaText,
+    type,
+    tags,
+    theme,
+  };
+  const parsedIdea = ideaSchema.safeParse(idea);
+
   const parsedEquipmentIds = z.array(z.string()).safeParse(equipmentIds);
 
   if (!parsedIdea.success || !parsedEquipmentIds.success) {
