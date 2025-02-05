@@ -3,9 +3,9 @@
 import { encodedRedirect } from "@/utils/utils";
 import ideaService from "../_services/ideaService";
 import { z } from "zod";
-import { Database } from "@/supabase/utils/types";
+import { TablesInsert } from "@/supabase/utils/types";
 
-const ideaSchema = z.custom<Database["public"]["Tables"]["ideas"]["Insert"]>();
+const ideaSchema = z.custom<TablesInsert<"ideas">>();
 
 export const uploadItem = async (prevData: unknown, formData: FormData) => {
   const idea = Object.fromEntries(formData);
@@ -30,8 +30,8 @@ export const uploadItem = async (prevData: unknown, formData: FormData) => {
   );
 
   if (error) {
-    return encodedRedirect("error", "/admin/new", "Upload failed");
+    return { errors: [error] };
   }
 
-  return encodedRedirect("success", "/admin", "Upload successful");
+  encodedRedirect("success", "/admin", "Upload successful");
 };

@@ -1,5 +1,5 @@
 import { createClient } from "@/supabase/utils/server";
-import { Database } from "@/supabase/utils/types";
+import { Tables, TablesInsert } from "@/supabase/utils/types";
 
 async function getDailyIdea() {
   "use server";
@@ -25,8 +25,8 @@ async function rerollIdea(userId: string) {
 }
 
 const uploadIdea = async (
-  newIdea: Database["public"]["Tables"]["ideas"]["Insert"],
-  equipmentList: Database["public"]["Tables"]["equipment"]["Row"]["id"][],
+  newIdea: TablesInsert<"ideas">,
+  equipmentList: Tables<"equipment">["id"][],
 ) => {
   "use server";
 

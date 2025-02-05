@@ -1,5 +1,5 @@
 import { createClient } from "@/supabase/utils/server";
-import { Database } from "@/supabase/utils/types";
+import { Database, Tables } from "@/supabase/utils/types";
 
 const getEquipment = async () => {
   "use server";
@@ -12,9 +12,7 @@ const getEquipment = async () => {
   return data;
 };
 
-const getEquipmentForIdea = async (
-  ideaId: Database["public"]["Tables"]["ideas"]["Row"]["id"],
-) => {
+const getEquipmentForIdea = async (ideaId: Tables<"ideas">["id"]) => {
   "use server";
 
   const supabase = await createClient();

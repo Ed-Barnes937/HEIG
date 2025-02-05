@@ -6,40 +6,104 @@ import { uploadItem } from "../api/idea";
 import { Textarea } from "@/components/ui/textarea";
 import { FormMessage } from "@/components/form-message";
 import { Input } from "@/components/ui/input";
-import { MultiSelect, Option } from "@/components/ui/multi-select";
+import MultiSelect, { Option } from "@/components/ui/multi-select";
+import { Enums } from "@/supabase/utils/types";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-const IdeaForm = ({ equipmentList }: { equipmentList: Option[] }) => {
+interface IdeaForm {
+  equipmentOptions: Option[];
+  tagOptions: Option[];
+  themeOptions: Option[];
+  typeOptions: Option<Enums<"idea_type">>[];
+  ageOptions: Option<Enums<"idea_age_range">>[];
+}
+
+const IdeaForm = ({
+  equipmentOptions,
+  tagOptions,
+  themeOptions,
+  typeOptions,
+  ageOptions,
+}: IdeaForm) => {
   const [state, formAction] = useActionState(uploadItem, undefined);
 
   return (
-    <form
-      action={formAction}
-      className="flex flex-col min-w-64 max-w-64 mx-auto"
-    >
+    <form action={formAction} className="flex flex-col w-1/2 mx-auto">
       <h1 className="text-2xl font-medium">New idea!</h1>
-      <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
+      <div className="flex flex-col gap-3 [&>input]:mb-3 mt-8">
         <Label htmlFor="idea">Idea</Label>
-        <Textarea name="idea" placeholder="Your brilliant idea..." required />
+        <Textarea
+          name="idea"
+          placeholder="Your brilliant idea..."
+          required
+          rows={10}
+        />
 
         <Label htmlFor="age_range">age_range</Label>
-        <Input name="age_range" type="number" disabled />
+        <Select disabled defaultValue={ageOptions[0].value}>
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Select age range" />
+          </SelectTrigger>
+          <SelectContent>
+            {ageOptions.map((option) => (
+              <SelectItem
+                key={option.value}
+                value={option.value}
+                disabled={option.disable}
+              >
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         <Label htmlFor="equipment_required">equipment_required</Label>
         <MultiSelect
-          values={equipmentList}
+          options={equipmentOptions}
           name="equipment_ids"
-          isLoading={false}
+          placeholder="Select Equipment"
         />
         <Label htmlFor="tags">tags</Label>
-        <Input name="tags" placeholder="tags" disabled />
+        <MultiSelect
+          options={tagOptions}
+          name="tags"
+          placeholder="Select Tags"
+          disabled
+        />
         <Label htmlFor="theme">theme</Label>
-        <Input name="theme" placeholder="theme" disabled />
+        <MultiSelect
+          options={themeOptions}
+          name="theme"
+          placeholder="Select Theme"
+          disabled
+        />
         <Label htmlFor="type">type</Label>
-        <Input name="type" placeholder="type" disabled />
+        <Select disabled defaultValue={typeOptions[0].value}>
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Select idea type" />
+          </SelectTrigger>
+          <SelectContent>
+            {typeOptions.map((option) => (
+              <SelectItem
+                key={option.value}
+                value={option.value}
+                disabled={option.disable}
+              >
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
 
         <SubmitButton pendingText="Uploading...">Upload</SubmitButton>
         {state?.errors &&
           Object.values(state.errors).map((error) => (
-            <FormMessage message={{ error: error[0] }} />
+            <FormMessage message={{ error: error }} />
           ))}
       </div>
     </form>

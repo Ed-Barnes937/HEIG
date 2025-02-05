@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import equipmentService from "../_services/equipmentService";
 import IdeaForm from "./ideaForm";
+import { ageRangeOptions, ideaTypeOptions } from "@/supabase/utils/enumOptions";
 
 export default async function Admin() {
   const equipment = await equipmentService.getEquipment();
@@ -12,7 +13,13 @@ export default async function Admin() {
 
   return (
     <Suspense>
-      <IdeaForm equipmentList={equipmentOptions} />
+      <IdeaForm
+        equipmentOptions={equipmentOptions}
+        tagOptions={[]}
+        themeOptions={[]}
+        typeOptions={ideaTypeOptions}
+        ageOptions={ageRangeOptions}
+      />
     </Suspense>
   );
 }
