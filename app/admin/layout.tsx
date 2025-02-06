@@ -15,7 +15,7 @@ const adminLayout = async ({
     );
 
   return (
-    <div className="bg-background/95 max-w-[90%] mx-auto min-w-[50%] p-8 rounded-lg">
+    <div className="bg-background/95 container mx-auto p-8 rounded-lg">
       {children}
     </div>
   );

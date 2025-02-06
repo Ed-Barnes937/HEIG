@@ -6,7 +6,7 @@ async function getAllIdeas() {
   const supabase = await createClient();
   const { data: ideas } = await supabase
     .from("ideas")
-    .select("*, equipment(name)");
+    .select("*, equipment(*)");
 
   if (!ideas) {
     return [];

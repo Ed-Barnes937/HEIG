@@ -1,26 +1,22 @@
-import { Badge } from "@/components/ui/badge";
+import { IdeaTable } from "@/components/admin/IdeaTable/IdeaTable";
 import ideaService from "../_services/ideaService";
+import { Suspense } from "react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default async function Admin() {
   const ideas = await ideaService.getAllIdeas();
 
   return (
-    <div>
-      {ideas.map((idea) => (
-        <div key={idea.id}>
-          <div>idea: {idea.idea}</div>
-          <div>tags: {idea.tags}</div>
-          <div>theme: {idea.theme}</div>
-          <div>type: {idea.type}</div>
-          <div>age: {idea.age_range}</div>
-          <div>
-            equipment:{" "}
-            {idea.equipment.map((item) => (
-              <Badge>{item.name}</Badge>
-            ))}
-          </div>
-        </div>
-      ))}
+    <div className="w-full">
+      <Suspense>
+        <IdeaTable ideas={ideas} />
+      </Suspense>
+      <div className="flex justify-end">
+        <Button asChild>
+          <Link href={"admin/new"}>New Idea!</Link>
+        </Button>
+      </div>
     </div>
   );
 }

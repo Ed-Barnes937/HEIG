@@ -71,7 +71,7 @@ export type Database = {
           idea: string
           tags: string[] | null
           theme: string | null
-          type: Database["public"]["Enums"]["idea_type"] | null
+          type: Database["public"]["Enums"]["idea_type"]
         }
         Insert: {
           age_range?: Database["public"]["Enums"]["idea_age_range"] | null
@@ -80,7 +80,7 @@ export type Database = {
           idea: string
           tags?: string[] | null
           theme?: string | null
-          type?: Database["public"]["Enums"]["idea_type"] | null
+          type?: Database["public"]["Enums"]["idea_type"]
         }
         Update: {
           age_range?: Database["public"]["Enums"]["idea_age_range"] | null
@@ -89,7 +89,7 @@ export type Database = {
           idea?: string
           tags?: string[] | null
           theme?: string | null
-          type?: Database["public"]["Enums"]["idea_type"] | null
+          type?: Database["public"]["Enums"]["idea_type"]
         }
         Relationships: []
       }
