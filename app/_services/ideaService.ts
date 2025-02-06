@@ -1,6 +1,20 @@
 import { createClient } from "@/supabase/utils/server";
 import { Tables, TablesInsert } from "@/supabase/utils/types";
 
+async function getAllIdeas() {
+  "use server";
+  const supabase = await createClient();
+  const { data: ideas } = await supabase
+    .from("ideas")
+    .select("*, equipment(name)");
+
+  if (!ideas) {
+    return [];
+  }
+
+  return ideas;
+}
+
 async function getDailyIdea() {
   "use server";
   const supabase = await createClient();
@@ -62,6 +76,7 @@ const uploadIdea = async (
 };
 
 export default {
+  getAllIdeas,
   getDailyIdea,
   rerollIdea,
   uploadIdea,
