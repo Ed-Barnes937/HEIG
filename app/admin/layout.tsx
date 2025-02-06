@@ -9,12 +9,16 @@ const adminLayout = async ({
 
   if (!isAdmin)
     return (
-      <div>
+      <div className="bg-background/95">
         <p>Access denied!</p>
       </div>
     );
 
-  return children;
+  return (
+    <div className="bg-background/95 max-w-[90%] mx-auto min-w-[50%] p-8 rounded-lg">
+      {children}
+    </div>
+  );
 };
 
 export default adminLayout;

@@ -2,10 +2,8 @@
 import { useActionState } from "react";
 import { Label } from "@/components/ui/label";
 import { SubmitButton } from "@/components/submit-button";
-import { uploadItem } from "../api/idea";
 import { Textarea } from "@/components/ui/textarea";
 import { FormMessage } from "@/components/form-message";
-import { Input } from "@/components/ui/input";
 import MultiSelect, { Option } from "@/components/ui/multi-select";
 import { Enums } from "@/supabase/utils/types";
 import {
@@ -15,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { uploadItem } from "@/app/api/idea";
 
 interface IdeaForm {
   equipmentOptions: Option[];
