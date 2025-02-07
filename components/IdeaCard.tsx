@@ -4,9 +4,10 @@ import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import type { Tables } from "@/supabase/utils/types";
 import RefreshIdeaButton from "./RefreshIdeaButton";
+import { CompleteIdea } from "@/supabase/utils/utilTypes";
 
 interface IdeaCardProps {
-  idea: Tables<"ideas">;
+  idea: CompleteIdea;
   error?: string;
   handleReroll?: () => void;
   rerolls: number;
@@ -45,23 +46,23 @@ export const IdeaCard = ({
       ) : (
         <p className="text-lg mb-4">{idea.idea}</p>
       )}
-      {/* {idea.equipment_required && (
+      {idea.equipment && (
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-muted-foreground">
             You'll need:
           </h3>
           <div className="flex flex-wrap gap-2 justify-center">
-            {idea.equipment_required.map((item) => (
+            {idea.equipment.map((item) => (
               <span
-                key={item}
+                key={item.id}
                 className="px-2 py-1 bg-secondary text-secondary-foreground rounded-md text-sm"
               >
-                {item}
+                {item.name}
               </span>
             ))}
           </div>
         </div>
-      )} */}
+      )}
     </CardContent>
     <CardFooter className="justify-end">
       <RefreshIdeaButton

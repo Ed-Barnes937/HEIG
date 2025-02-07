@@ -18,7 +18,9 @@ async function getAllIdeas() {
 async function getDailyIdea() {
   "use server";
   const supabase = await createClient();
-  const { data: ideas } = await supabase.from("ideas").select("*");
+  const { data: ideas } = await supabase
+    .from("ideas")
+    .select("*, equipment(*)");
 
   if (!ideas) {
     return null;
