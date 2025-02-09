@@ -1,4 +1,5 @@
-import { createClient } from "@/supabase/utils/server";
+import { userProfileQuery } from "../queries/user";
+import { createClient } from "../server";
 
 const getUserProfile = async () => {
   "use server";
@@ -12,17 +13,13 @@ const getUserProfile = async () => {
     return null;
   }
 
-  const { data: profile, error: profileError } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("id", user.id)
-    .single();
+  const profileQuery = await userProfileQuery(supabase, user.id);
 
-  if (!profile || profileError) {
+  if (!profileQuery.data || profileQuery.error) {
     throw new Error("Error fetching profile");
   }
 
-  return profile;
+  return profileQuery.data;
 };
 
 const isLoggedIn = async () => {

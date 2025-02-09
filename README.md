@@ -15,5 +15,5 @@
 - [x] Create a supabase client
 - [x] Setup auth through supabase
 - [x] Setup a way to fetch 1 random idea from the database if not logged in
-- [ ] if logged in, allow limited free re-rolls
+- [x] if logged in, allow limited free re-rolls
 - [ ] Allow topping up re-roll tokens
