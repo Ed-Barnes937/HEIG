@@ -1,7 +1,7 @@
 import { signOutAction } from "@/app/api/auth";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import userService from "@/app/_services/userService";
+import userService from "@/utils/supabase/services/userService";
 
 export default async function AuthButton() {
   const user = await userService.getUserProfile();

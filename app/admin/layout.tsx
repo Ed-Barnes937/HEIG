@@ -1,6 +1,6 @@
 import { H1 } from "@/components/ui/H1";
-import userService from "../_services/userService";
 import { Button } from "@/components/ui/button";
+import userService from "@/utils/supabase/services/userService";
 import Link from "next/link";
 
 const adminLayout = async ({

@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import IdeaForm from "./ideaForm";
-import equipmentService from "@/app/_services/equipmentService";
-import { ageRangeOptions, ideaTypeOptions } from "@/supabase/utils/enumOptions";
+import { ageRangeOptions, ideaTypeOptions } from "@/utils/supabase/enumOptions";
+import equipmentService from "@/utils/supabase/services/equipmentService";
 
 export default async function newIdea() {
   const equipment = await equipmentService.getEquipment();

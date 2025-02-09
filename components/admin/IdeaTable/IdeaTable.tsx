@@ -1,5 +1,4 @@
 "use client";
-import { CompleteIdea } from "@/supabase/utils/utilTypes";
 import {
   ColumnFiltersState,
   flexRender,
@@ -20,9 +19,10 @@ import {
 } from "@/components/ui/table";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { IdeaWithEquipment } from "@/utils/supabase/queries/idea";
 
 interface IdeaTableProps {
-  ideas: CompleteIdea[];
+  ideas: IdeaWithEquipment;
 }
 
 export const IdeaTable = ({ ideas }: IdeaTableProps) => {

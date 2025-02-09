@@ -1,9 +1,9 @@
 import { Badge } from "@/components/ui/badge";
-import { CompleteIdea } from "@/supabase/utils/utilTypes";
 import { createColumnHelper } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "@/components/ui/data-table/column-header";
+import { IdeaWithEquipment } from "@/utils/supabase/queries/idea";
 
-const columnHelper = createColumnHelper<CompleteIdea>();
+const columnHelper = createColumnHelper<IdeaWithEquipment[0]>();
 
 const defaultColumns = [
   columnHelper.accessor("idea", {

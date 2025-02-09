@@ -5,7 +5,7 @@ import { SubmitButton } from "@/components/submit-button";
 import { Textarea } from "@/components/ui/textarea";
 import { FormMessage } from "@/components/form-message";
 import MultiSelect, { Option } from "@/components/ui/multi-select";
-import { Enums } from "@/supabase/utils/types";
+import { Enums } from "@/utils/supabase/types";
 import {
   Select,
   SelectContent,
@@ -101,8 +101,8 @@ const IdeaForm = ({
 
         <SubmitButton pendingText="Uploading...">Upload</SubmitButton>
         {state?.errors &&
-          Object.values(state.errors).map((error) => (
-            <FormMessage message={{ error: error }} />
+          state.errors.map((error) => (
+            <FormMessage message={{ error: "failed to upload idea" }} />
           ))}
       </div>
     </form>

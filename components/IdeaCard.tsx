@@ -2,12 +2,11 @@
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
-import type { Tables } from "@/supabase/utils/types";
 import RefreshIdeaButton from "./RefreshIdeaButton";
-import { CompleteIdea } from "@/supabase/utils/utilTypes";
+import { IdeaWithEquipment } from "@/utils/supabase/queries/idea";
 
 interface IdeaCardProps {
-  idea: CompleteIdea;
+  idea: IdeaWithEquipment[0];
   error?: string;
   handleReroll?: () => void;
   rerolls: number;

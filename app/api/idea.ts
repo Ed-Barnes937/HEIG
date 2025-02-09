@@ -1,9 +1,9 @@
 "use server";
 
+import ideaService from "@/utils/supabase/services/ideaService";
+import { Enums, TablesInsert } from "@/utils/supabase/types";
 import { encodedRedirect } from "@/utils/utils";
-import ideaService from "../_services/ideaService";
 import { z } from "zod";
-import { Enums, Tables, TablesInsert } from "@/supabase/utils/types";
 
 const ideaSchema = z.custom<TablesInsert<"ideas">>();
 
@@ -35,14 +35,14 @@ export const uploadItem = async (prevData: unknown, formData: FormData) => {
     return { errors };
   }
 
-  const { error } = await ideaService.uploadIdea(
-    parsedIdea.data,
-    parsedEquipmentIds.data,
-  );
+  try {
+    const item = await ideaService.uploadIdea(
+      parsedIdea.data,
+      parsedEquipmentIds.data,
+    );
 
-  if (error) {
-    return { errors: [error] };
+    encodedRedirect("success", "/admin", "Upload successful");
+  } catch (err) {
+    return { data: null, error: err };
   }
-
-  encodedRedirect("success", "/admin", "Upload successful");
 };

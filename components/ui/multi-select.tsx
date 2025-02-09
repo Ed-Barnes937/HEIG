@@ -13,7 +13,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { cn } from "@/lib/utils";
-import { useDebounce } from "@/lib/useDebounce";
+import { useDebounce } from "@/hooks/useDebounce";
 
 export interface Option<T extends string = string> {
   value: T;

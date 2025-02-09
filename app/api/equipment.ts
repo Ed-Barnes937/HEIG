@@ -1,4 +1,4 @@
-import equipmentService from "../_services/equipmentService";
+import equipmentService from "@/utils/supabase/services/equipmentService";
 
 const fetchEquipment = async () => {
   "use server";

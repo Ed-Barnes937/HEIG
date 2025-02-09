@@ -1,9 +1,9 @@
 "use server";
 
+import authService from "@/utils/supabase/services/authService";
 import { encodedRedirect } from "@/utils/utils";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import authService from "../_services/authService";
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();

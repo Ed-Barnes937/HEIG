@@ -1,8 +1,8 @@
 import { IdeaCard } from "@/components/IdeaCard";
 import { H1 } from "@/components/ui/H1";
+import ideaService from "@/utils/supabase/services/ideaService";
+import userService from "@/utils/supabase/services/userService";
 import { Lightbulb } from "lucide-react";
-import userService from "./_services/userService";
-import ideaService from "./_services/ideaService";
 
 export default async function Home() {
   const isLoggedIn = await userService.isLoggedIn();
